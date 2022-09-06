@@ -4,14 +4,17 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem "sqlite3"
 #
+
+# changing the database adapter from SQLITE to Postgress
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  url: postgresql://omanal:password/triple_triad
+  # database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -22,4 +25,5 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  url: ENV['DATABASE_URL']
+  # database: db/production.sqlite3
